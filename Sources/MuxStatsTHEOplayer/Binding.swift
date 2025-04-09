@@ -215,7 +215,7 @@ fileprivate extension Binding {
             let source = evt.source?.sources.first
             if (source != nil) {
                 let data = MUXSDKVideoData()
-                data.videoSourceUrl = source?.src.absoluteString
+                data.videoSourceUrl = source?.src
                 let event = MUXSDKDataEvent()
                 event.videoData = data
                 MUXSDKCore.dispatchEvent(event, forPlayer: self.name)
@@ -292,7 +292,7 @@ fileprivate extension Binding {
             self.dispatchEvent(MUXSDKTimeUpdateEvent.self, checkVideoData: true)
         }
 
-        let containsAdsIntegration = player.getAllIntegrations().contains { $0.type == .ADS }
+        let containsAdsIntegration = false //player.getIntegrationByKind(kind = .ADS)
 
         if containsAdsIntegration {
             adBreakBeginListener = player.ads.addEventListener(type: AdsEventTypes.AD_BREAK_BEGIN) { (_: AdBreakBeginEvent) in
